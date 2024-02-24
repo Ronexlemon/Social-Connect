@@ -1,0 +1,25 @@
+{
+  "name": "socialconnect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/index.js"
+  },
+  "author": "ronex",
+  "license": "ISC",
+  "dependencies": {
+    "@celo/contractkit": "^7.0.0",
+    "@celo/identity": "^5.1.1",
+    "blind-threshold-bls": "https://github.com/celo-org/blind-threshold-bls-wasm#3d1013a",
+    "nodemon": "^3.1.0",
+    "web3-core": "^4.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.20",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  }
+}
