@@ -13,6 +13,7 @@
     "@celo/contractkit": "^7.0.0",
     "@celo/identity": "^5.1.1",
     "blind-threshold-bls": "https://github.com/celo-org/blind-threshold-bls-wasm#3d1013a",
+    "ethers": "^6.11.1",
     "nodemon": "^3.1.0",
     "web3-core": "^4.3.2"
   },

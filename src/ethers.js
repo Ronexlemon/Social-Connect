@@ -7,17 +7,21 @@ import {
     ODIS_PAYMENTS_CONTRACT,
     ODIS_PAYMENTS_PROXY_ADDRESS,
     STABLE_TOKEN_CONTRACT,
-  } from './constants'
-  import { OdisUtils } from '@celo/identity'
-  import { AuthenticationMethod, AuthSigner, OdisContextName } from '@celo/identity/lib/odis/query'
-  import { ethers, Wallet } from 'ethers'
+  } from './constant/constants'
+  //import { OdisUtils } from '@celo/identity'
+  const {OdisUtils} = require("@celo/identity")
+  //import { AuthenticationMethod, AuthSigner, OdisContextName } from '@celo/identity/lib/odis/query'
+  const {AuthenticationMethod, AuthSigner, OdisContextName} = require("@celo/identity/lib/odis/query")
+  //import { ethers, Wallet } from 'ethers'
+  const {ethers,Wallet} = require("ethers")
   
   const USER_ACCOUNT = '0xf14790BAdd2638cECB5e885fc7fAD1b6660AAc34'
   const USER_PHONE_NUMBER = '+18009099991'
   
-  const ISSUER_PRIVATE_KEY = '0x726e53db4f0a79dfd63f58b19874896fce3748fcb80874665e0c147369c04a37'
-  const DEK_PUBLIC_KEY = '0x026063780c81991c032fb4fa7485c6607b7542e048ef85d08516fe5c4482360e4b'
-  const DEK_PRIVATE_KEY = '0xc2bbdabb440141efed205497a41d5fb6114e0435fd541e368dc628a8e086bfee'
+  const ISSUER_PRIVATE_KEY = '702e72b6f85b15f28e500b9aafca6bf1690463b411a54cbe4d5a47e8865549d3' 
+ const DEK_PUBLIC_KEY = '03663bbcaa737dbf538eb90cefc421513a93324334ecdbe72f5a053f6d50619e42' 
+    
+const DEK_PRIVATE_KEY = '1acbf2638007fc31f91abbd03c53dca7ee90f562610891d7626ebcb1c45d4ca2'
   
   const ALFAJORES_RPC = 'https://alfajores-forno.celo-testnet.org'
   
@@ -28,7 +32,7 @@ import {
     issuer = new Wallet(ISSUER_PRIVATE_KEY, this.provider)
     serviceContext = OdisUtils.Query.getServiceContext(OdisContextName.ALFAJORES)
   
-    authSigner: AuthSigner = {
+    authSigner = {
       authenticationMethod: AuthenticationMethod.ENCRYPTION_KEY,
       rawKey: DEK_PRIVATE_KEY,
     }
@@ -55,7 +59,7 @@ import {
       this.accountsContract.setAccountDataEncryptionKey(DEK_PUBLIC_KEY)
     }
   
-    async registerAttestation(phoneNumber: string, account: string) {
+    async registerAttestation(phoneNumber, account) {
       await this.checkAndTopUpODISQuota()
   
       // get identifier from phone number using ODIS
@@ -77,7 +81,7 @@ import {
       )
     }
   
-    async lookupAddresses(phoneNumber: string) {
+    async lookupAddresses(phoneNumber) {
       // get identifier from phone number using ODIS
       const obfuscatedIdentifier = (
         await OdisUtils.Identifier.getObfuscatedIdentifier(
@@ -98,7 +102,7 @@ import {
       return attestations.accounts
     }
   
-    private async checkAndTopUpODISQuota() {
+     async checkAndTopUpODISQuota() {
       //check remaining quota
       const { remainingQuota } = await OdisUtils.Quota.getPnpQuotaStatus(
         this.issuer.address,
@@ -114,7 +118,7 @@ import {
           this.odisPaymentsContract.address,
         )
         console.log('current allowance:', currentAllowance.toString())
-        let enoughAllowance: boolean = false
+        let enoughAllowance = false
   
         const ONE_CENT_CUSD_WEI = ethers.utils.parseEther('0.01')
   
