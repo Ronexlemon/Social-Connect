@@ -118,6 +118,7 @@ class ASv2 {
 
 ;(async () => {
   const kit = await newKit(ALFAJORES_RPC)
+  
   const asv2 = new ASv2(kit)
   const userAccount = '0xf14790BAdd2638cECB5e885fc7fAD1b6660AAc34'
   const userPhoneNumber = '+18009099999'
